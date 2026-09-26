@@ -1,11 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 import models, schemas
 from database import engine, get_db
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,3 +29,7 @@ def create_contact(contact: schemas.ContactCreate, db: Session = Depends(get_db)
 def get_contact(contact_id: int, db: Session = Depends(get_db)):
     contacts = db.query(models.Contact).all()
     return contacts
+
+@app.get("/")
+def read_root():
+    return FileResponse("templates/FileHTML.html")
