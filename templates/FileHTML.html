@@ -246,33 +246,46 @@
 <footer>
     <p>Bài giữa kỳ 2 tin học</p>
 </footer>
+<script src="/static/script.js"></script>
+
 <script>
-    const links = document.querySelectorAll("a[href^='#']");
-    const sections = document.querySelectorAll(".content");
+    document.addEventListener("DOMContentLoaded", function() {
+        const links = document.querySelectorAll("a[href^='#']");
+        const sections = document.querySelectorAll(".content");
 
-    links.forEach(link => {
-     link.addEventListener("click", function(event) {
-        event.preventDefault();
+        links.forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
 
-        const targetId = this.getAttribute("href").substring(1);
+                const targetId = this.getAttribute("href").substring(1);
 
-        // Hide all sections
-        sections.forEach(section => {
-            section.classList.add("hidden");
+                // Ẩn tất cả các section
+                sections.forEach(section => {
+                    section.classList.add("hidden");
+                });
+
+                // Hiện section được chọn
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.remove("hidden");
+                }
+            });
         });
-
-        // Show selected section
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-            targetSection.classList.remove("hidden");
-        }
-        function showAuthor() {
-            document.getElementById("author").classList.remove("hidden");
-            document.getElementById("author").scrollIntoView({ behavior: "smooth" });
-        }
     });
-});
+
+    // Hàm chuyển tới trang Tác giả khi bấm link ở cuối bài thơ
+    function showauthor(event) {
+        if(event) event.preventDefault();
+        
+        const sections = document.querySelectorAll(".content");
+        sections.forEach(section => section.classList.add("hidden"));
+
+        const authorSection = document.getElementById("author");
+        if (authorSection) {
+            authorSection.classList.remove("hidden");
+            authorSection.scrollIntoView({ behavior: "smooth" });
+        }
+    }
 </script>
-<script src="../static/script.js"></script>
 </body>
 </html>
