@@ -1,0 +1,29 @@
+# Python Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Byte-compiled / optimized / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables & secrets (CRITICAL: Never commit your database passwords/keys)
+.env
+.env.*
+!.env.example
+
+# Local SQLite databases & instance folders (From your old Flask setup)
+instance/
+*.db
+*.sqlite3
+
+# Docker local logs and temp files
+*.log
+
+# OS & Editor generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
