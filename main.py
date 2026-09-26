@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("api/contact", response_model=schemas.ContactResponse, status_code=status.HTTP_201_CREATED)
+@app.post("/api/contact", response_model=schemas.ContactResponse, status_code=status.HTTP_201_CREATED)
 def create_contact(contact: schemas.ContactCreate, db: Session = Depends(get_db)):
     db_contact = models.Contact(name=contact.name, email=contact.email)
     db.add(db_contact)
