@@ -25,7 +25,8 @@ def create_contact(contact: schemas.ContactCreate, db: Session = Depends(get_db)
     db.commit()
     db.refresh(db_contact)
     return db_contact
-
+    
+@app.get("/api/contacts", response_model=list[schemas.ContactResponse])
 def get_contact(contact_id: int, db: Session = Depends(get_db)):
     contacts = db.query(models.Contact).all()
     return contacts
